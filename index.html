@@ -104,6 +104,7 @@
             border-left: 5px solid var(--lavender-dark);
             text-align: left;
             font-size: 0.95rem;
+            display: none; /* Hidden by default until submitted */
         }
     </style>
 </head>
@@ -113,15 +114,16 @@
     <h1>Hey JokiiiiBoy! ✨</h1>
     <p class="subtitle">Track your day in style</p>
 
-    <form action="/submit-tracker" method="POST">
+    <!-- Changed to prevent page reload and use JavaScript instead -->
+    <form id="trackerForm">
         <div class="form-group">
             <label for="task">What did you build today?</label>
-            <input type="text" id="task" name="task" placeholder="e.g., Fixed a Java bug..." required>
+            <input type="text" id="task" placeholder="e.g., Fixed a backend bug..." required>
         </div>
 
         <div class="form-group">
             <label for="mood">Current Mood</label>
-            <select id="mood" name="mood">
+            <select id="mood">
                 <option value="Happy">✨ Happy / Productive</option>
                 <option value="Tired">😴 Tired / Relaxed</option>
                 <option value="Focused">🧠 Code Mode</option>
@@ -131,10 +133,40 @@
         <button type="submit">Log Status</button>
     </form>
 
-    <div class="result-box">
-        <strong>System Status:</strong> Ready to process your next achievement!
+    <div class="result-box" id="resultBox">
+        <!-- This content updates dynamically -->
     </div>
 </div>
+
+<script>
+    document.getElementById('trackerForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Stop the form from trying to find a Java server
+
+        const task = document.getElementById('task').value;
+        const mood = document.getElementById('mood').value;
+        const resultBox = document.getElementById('resultBox');
+
+        // The logic originally written in Java, now running inside the browser
+        let encouragement = "Keep coding cleanly! 💻";
+        if (mood === "Happy") {
+            encouragement = "Incredible! Keep riding that creative wave. 🌊";
+        } else if (mood === "Focused") {
+            encouragement = "Absolute genius zone. You're unstoppable! 🧠✨";
+        } else if (mood === "Tired") {
+            encouragement = "Make sure to take a break and get some hot cocoa. ☕";
+        }
+
+        // Update the HTML content instantly
+        resultBox.innerHTML = `
+            <strong>Successfully logged!</strong><br>
+            <span style="font-size: 0.9rem; color: #7a708a;">Task: "${task}"</span><br><br>
+            ${encouragement}
+        `;
+        
+        // Show the box
+        resultBox.style.display = "block";
+    });
+</script>
 
 </body>
 </html>
