@@ -1,1 +1,140 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pastel Mood & Task Tracker</title>
+    <style>
+        :root {
+            --bg-color: #f3f0f7;
+            --card-bg: #ffffff;
+            --lavender-primary: #dcd0ff;
+            --lavender-dark: #b19ffb;
+            --text-color: #5a5266;
+        }
 
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background-color: var(--card-bg);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 25px rgba(177, 159, 251, 0.15);
+            max-width: 450px;
+            width: 100%;
+            text-align: center;
+        }
+
+        h1 {
+            color: var(--lavender-dark);
+            margin-bottom: 5px;
+            font-size: 1.8rem;
+        }
+
+        p.subtitle {
+            font-size: 0.9rem;
+            color: #a197b0;
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        input[type="text"], select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid var(--bg-color);
+            border-radius: 10px;
+            box-sizing: border-box;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus, select:focus {
+            outline: none;
+            border-color: var(--lavender-dark);
+        }
+
+        button {
+            background-color: var(--lavender-primary);
+            color: var(--text-color);
+            border: none;
+            padding: 12px 25px;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s, transform 0.1s;
+        }
+
+        button:hover {
+            background-color: var(--lavender-dark);
+            color: white;
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        .result-box {
+            margin-top: 25px;
+            padding: 15px;
+            background-color: var(--bg-color);
+            border-radius: 10px;
+            border-left: 5px solid var(--lavender-dark);
+            text-align: left;
+            font-size: 0.95rem;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Hey JokiiiiBoy! ✨</h1>
+    <p class="subtitle">Track your day in style</p>
+
+    <form action="/submit-tracker" method="POST">
+        <div class="form-group">
+            <label for="task">What did you build today?</label>
+            <input type="text" id="task" name="task" placeholder="e.g., Fixed a Java bug..." required>
+        </div>
+
+        <div class="form-group">
+            <label for="mood">Current Mood</label>
+            <select id="mood" name="mood">
+                <option value="Happy">✨ Happy / Productive</option>
+                <option value="Tired">😴 Tired / Relaxed</option>
+                <option value="Focused">🧠 Code Mode</option>
+            </select>
+        </div>
+
+        <button type="submit">Log Status</button>
+    </form>
+
+    <div class="result-box">
+        <strong>System Status:</strong> Ready to process your next achievement!
+    </div>
+</div>
+
+</body>
+</html>
