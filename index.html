@@ -40,18 +40,25 @@
             border: 1px solid rgba(179, 157, 219, 0.2);
         }
 
-        /* Avatar Placeholder with Purple Glow */
-        .avatar {
+        /* Avatar Container with Purple Glow */
+        .avatar-container {
             width: 110px;
             height: 110px;
             border-radius: 50%;
             background: linear-gradient(135deg, var(--lavender-light), var(--purple-accent));
             margin: 0 auto 20px auto;
+            padding: 4px; /* Creates a small pastel border around your image */
+            box-shadow: 0 8px 20px rgba(179, 157, 219, 0.4);
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 2.5rem;
-            box-shadow: 0 8px 20px rgba(179, 157, 219, 0.4);
+        }
+
+        .avatar-container img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover; /* Ensures the image doesn't stretch distort */
         }
 
         h1 {
@@ -124,8 +131,10 @@
 <body>
 
 <div class="profile-card">
-    <!-- You can replace the emoji with an <img> tag later if you want a profile picture -->
-    <div class="avatar">✨</div>
+    <!-- Your Discord Avatar Box -->
+    <div class="avatar-container">
+        <img src="https://cdn.discordapp.com/attachments/1471523107331375259/1505015914675048601/kh0b0b9.png?ex=6a0916cb&is=6a07c54b&hm=0b5fd1fe23495d5bc33b2d5f96f3f8a89c9a3354cd5a280eecd38b76bbd333fe&" alt="JokiiiiBoy Avatar">
+    </div>
     
     <h1>JokiiiiBoy</h1>
     <div class="subtitle">Creative Coder & Frontend Design Fan</div>
@@ -141,7 +150,7 @@
         <span class="badge">🐍 Python</span>
     </div>
 
-    <!-- Replace the '#' with your actual GitHub Profile link -->
+    <!-- Just replace '#' with your GitHub link whenever you are ready! -->
     <a href="#" class="btn-github" target="_blank">Visit my GitHub Profile</a>
 </div>
 
