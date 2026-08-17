@@ -3,22 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JokiiiiBoy | About Me</title>
+    <title>JokiiiiBoy | Profile & Cyber Terminal</title>
     <style>
-        /* Sleek Dark Purple Palette */
+        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@500;700&family=Paytone+One&family=Rajdhani:wght@600;700&display=swap');
+
         :root {
-            --bg-dark: #0f0a1c;
-            --card-dark: #171226;
+            --bg-dark: #07050d;
+            --card-dark: rgba(18, 12, 31, 0.85);
+            --neon-green: #a2ff00;
+            --neon-pink: #ff007f;
+            --neon-cyan: #00f3ff;
             --lavender-glow: #bb86fc;
-            --purple-accent: #3700b3;
-            --purple-surface: #231b3a;
             --text-main: #e3dff2;
-            --text-muted: #a59cb8;
+            --text-muted: #887a9e;
+        }
+
+        ::selection {
+            background: var(--neon-green);
+            color: #000;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-dark);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, var(--neon-green), var(--neon-pink));
+            border-radius: 4px;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Rajdhani', sans-serif;
             background-color: var(--bg-dark);
+            background-image: 
+                radial-gradient(circle at 15% 15%, rgba(187, 134, 252, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 85% 85%, rgba(162, 255, 0, 0.06) 0%, transparent 40%),
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 100% 100%, 100% 100%, 30px 30px, 30px 30px;
             color: var(--text-main);
             margin: 0;
             padding: 40px 20px;
@@ -27,33 +52,114 @@
             align-items: center;
             min-height: 100vh;
             box-sizing: border-box;
+            overflow-x: hidden;
+            cursor: crosshair;
         }
 
+        /* 1. TOP-RIGHT SECRET HUD WATERMARK LINK */
+        .secret-hud {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            background: rgba(10, 8, 18, 0.95);
+            color: var(--neon-green) !important;
+            font-family: 'Fira Code', monospace;
+            font-size: 11px;
+            padding: 6px 14px;
+            border: 1px solid #2d2a45;
+            border-top: 2px solid var(--neon-green);
+            box-shadow: 0 0 15px rgba(162, 255, 0, 0.2);
+            border-radius: 4px;
+            z-index: 10000;
+            text-decoration: none;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+        .secret-hud:hover {
+            background: var(--neon-green);
+            color: #000 !important;
+            box-shadow: 0 0 25px var(--neon-green);
+            transform: scale(1.05);
+        }
+
+        /* 2. FLOATING SECRET SIDE ORBS */
+        .secret-orb-container {
+            position: fixed;
+            z-index: 9999;
+        }
+        .orb-left { top: 40%; left: 20px; }
+        .orb-right { top: 50%; right: 20px; }
+
+        .secret-orb {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            background: rgba(18, 12, 31, 0.9);
+            border: 1px solid var(--neon-pink);
+            border-radius: 50%;
+            color: var(--neon-cyan) !important;
+            font-family: 'Fira Code', monospace;
+            font-size: 16px;
+            text-decoration: none;
+            box-shadow: 0 0 12px rgba(255, 0, 127, 0.4);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: orbFloat 4s infinite ease-in-out;
+        }
+        .secret-orb:hover {
+            width: 150px;
+            border-radius: 22px;
+            border-color: var(--neon-green);
+            background: #090614;
+            color: var(--neon-green) !important;
+            box-shadow: 0 0 25px var(--neon-green);
+        }
+        .secret-orb .orb-text {
+            display: none;
+            font-size: 11px;
+            font-weight: bold;
+            margin-left: 8px;
+            letter-spacing: 1px;
+        }
+        .secret-orb:hover .orb-text {
+            display: inline;
+        }
+
+        /* 3. MAIN CARD CONTAINER */
         .profile-card {
-            background-color: var(--card-dark);
+            background: var(--card-dark);
+            backdrop-filter: blur(12px);
             border-radius: 24px;
-            padding: 35px;
+            padding: 40px 35px;
             max-width: 480px;
             width: 100%;
             text-align: center;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), 0 0 20px rgba(187, 134, 252, 0.05);
-            border: 1px solid rgba(187, 134, 252, 0.1);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 30px rgba(187, 134, 252, 0.15);
+            border: 1px solid rgba(187, 134, 252, 0.2);
+            position: relative;
+            animation: cardPulse 3s infinite ease-in-out;
         }
 
-        /* Avatar Container with Neon Lavender Glow */
+        /* Avatar Container with Glitch & Hologram Effect */
         .avatar-container {
-            width: 110px;
-            height: 110px;
+            width: 120px;
+            height: 120px;
             border-radius: 50%;
-            background: linear-gradient(135deg, var(--lavender-glow), #7928ca);
+            background: linear-gradient(135deg, var(--neon-green), var(--neon-pink), var(--neon-cyan));
             margin: 0 auto 20px auto;
-            padding: 3px; /* Thin glow border */
-            box-shadow: 0 0 25px rgba(187, 134, 252, 0.3);
+            padding: 3px;
+            box-shadow: 0 0 30px rgba(162, 255, 0, 0.3);
             display: flex;
             justify-content: center;
             align-items: center;
+            transition: transform 0.4s ease;
         }
-
+        .avatar-container:hover {
+            transform: scale(1.08) rotate(3deg);
+            box-shadow: 0 0 45px rgba(255, 0, 127, 0.6);
+            animation: glitchShake 0.2s infinite;
+        }
         .avatar-container img {
             width: 100%;
             height: 100%;
@@ -61,108 +167,192 @@
             object-fit: cover;
         }
 
+        /* Title & Gradient */
         h1 {
-            color: #ffffff;
-            margin: 0 0 8px 0;
-            font-size: 1.8rem;
-            letter-spacing: -0.5px;
-            text-shadow: 0 2px 10px rgba(255, 255, 255, 0.1);
+            font-family: 'Paytone One', sans-serif;
+            margin: 0 0 6px 0;
+            font-size: 2.2rem;
+            letter-spacing: 1px;
+            background: linear-gradient(90deg, var(--neon-green), var(--lavender-glow), var(--neon-cyan), var(--neon-pink));
+            background-size: 300% 100%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: rainbowShift 4s linear infinite;
         }
 
         .subtitle {
-            font-size: 0.95rem;
-            color: var(--lavender-glow);
-            margin-bottom: 20px;
-            font-weight: 600;
-            letter-spacing: 0.5px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.85rem;
+            color: var(--neon-green);
+            margin-bottom: 22px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
         .bio {
-            font-size: 1rem;
+            font-size: 1.05rem;
             line-height: 1.6;
             color: var(--text-main);
             margin-bottom: 25px;
-            background-color: var(--purple-surface);
-            padding: 18px;
-            border-radius: 14px;
-            border: 1px solid rgba(187, 134, 252, 0.05);
+            background-color: rgba(28, 20, 48, 0.6);
+            padding: 20px;
+            border-radius: 16px;
+            border: 1px solid rgba(187, 134, 252, 0.15);
+            text-align: left;
+            position: relative;
+        }
+        .bio::before {
+            content: "// BIO_LOG";
+            display: block;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-bottom: 8px;
         }
 
-        /* Skills Tags */
+        /* Tech Stack Badges */
         .tech-stack {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 8px;
+            gap: 10px;
             margin-bottom: 30px;
         }
 
         .badge {
-            background-color: var(--purple-surface);
+            background-color: rgba(35, 27, 58, 0.8);
             color: var(--text-main);
-            padding: 6px 14px;
-            border-radius: 20px;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-family: 'Fira Code', monospace;
             font-size: 0.85rem;
-            font-weight: 600;
-            border: 1px solid rgba(187, 134, 252, 0.15);
-            transition: border-color 0.3s, transform 0.2s;
+            font-weight: 700;
+            border: 1px solid rgba(187, 134, 252, 0.2);
+            transition: all 0.3s ease;
+            text-decoration: none;
         }
-
         .badge:hover {
-            border-color: var(--lavender-glow);
-            transform: translateY(-1px);
+            border-color: var(--neon-green);
+            color: var(--neon-green);
+            background: rgba(162, 255, 0, 0.1);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(162, 255, 0, 0.2);
         }
 
-        /* Neon Purple Link Button */
+        /* Neon Primary Button */
         .btn-github {
-            display: inline-block;
-            background: linear-gradient(135deg, #7928ca, #4c1d95);
+            display: block;
+            width: 100%;
+            box-sizing: border-box;
+            background: linear-gradient(135deg, #7928ca, #ff007f);
             color: white;
             text-decoration: none;
-            padding: 14px 32px;
+            padding: 16px 20px;
             border-radius: 12px;
-            font-weight: bold;
-            font-size: 0.95rem;
-            transition: filter 0.3s, transform 0.2s, box-shadow 0.3s;
-            box-shadow: 0 4px 15px rgba(121, 40, 202, 0.3);
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(255, 0, 127, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
-
         .btn-github:hover {
-            filter: brightness(1.1);
+            filter: brightness(1.2);
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(121, 40, 202, 0.5);
+            box-shadow: 0 8px 25px rgba(255, 0, 127, 0.6), 0 0 15px var(--neon-green);
         }
 
-        .btn-github:active {
-            transform: translateY(0);
+        /* 4. BOTTOM SECRET TERMINAL TRIGGER */
+        .secret-terminal {
+            display: inline-block;
+            margin-top: 20px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+        .secret-terminal:hover {
+            color: var(--neon-cyan);
+            background: rgba(0, 243, 255, 0.1);
+            text-shadow: 0 0 8px var(--neon-cyan);
+        }
+
+        /* Keyframes */
+        @keyframes rainbowShift {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 300% 50%; }
+        }
+        @keyframes cardPulse {
+            0% { border-color: rgba(187, 134, 252, 0.2); }
+            50% { border-color: rgba(162, 255, 0, 0.4); }
+            100% { border-color: rgba(187, 134, 252, 0.2); }
+        }
+        @keyframes orbFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        @keyframes glitchShake {
+            0% { transform: translate(0, 0) scale(1.08); }
+            25% { transform: translate(-2px, 2px) scale(1.08); }
+            50% { transform: translate(2px, -2px) scale(1.08); }
+            75% { transform: translate(-2px, -2px) scale(1.08); }
+            100% { transform: translate(0, 0) scale(1.08); }
         }
     </style>
 </head>
 <body>
 
-<div class="profile-card">
-    
-    <div class="avatar-container">
-        <img src="https://cdn.discordapp.com/attachments/1471523107331375259/1505015914675048601/kh0b0b9.png?ex=6a0916cb&is=6a07c54b&hm=0b5fd1fe23495d5bc33b2d5f96f3f8a89c9a3354cd5a280eecd38b76bbd333fe&" alt="JokiiiiBoy Avatar">
-    </div>
-    
-    <h1>JokiiiiBoy</h1>
-    <div class="subtitle">Creative Coder & Frontend Design Fan</div>
-    
-    <div class="bio">
-        Hey there! Welcome to my cozy corner of the internet. 🔮 I love building clean layouts, playing with aesthetic designs, and diving into tech. Always exploring new ideas and keeping my code neat!
-    </div>
+    <!-- SECRET HUD LINK (Top Right) -->
+    <a href="https://github.com/JokiiiBoy?tab=repositories" target="_blank" class="secret-hud">
+        [SYS_STATUS: ACTIVE | UID: 1337]
+    </a>
 
-    <div class="tech-stack">
-        <span class="badge">🌐 HTML5</span>
-        <span class="badge">☕ Java</span>
-        <span class="badge">📜 JavaScript</span>
-        <span class="badge">🐍 Python</span>
+    <!-- SECRET SIDE ORB BUTTONS -->
+    <div class="secret-orb-container orb-left">
+        <a href="https://github.com/JokiiiBoy" target="_blank" class="secret-orb">
+            ⛧ <span class="orb-text">SECRET REPO</span>
+        </a>
     </div>
 
+    <div class="secret-orb-container orb-right">
+        <a href="https://github.com/JokiiiBoy" target="_blank" class="secret-orb">
+            ⚡ <span class="orb-text">CFG / DOTFILES</span>
+        </a>
+    </div>
 
-    <a href="https://github.com/JokiiiBoy" class="btn-github" target="_blank">Visit my GitHub Profile</a>
-</div>
+    <!-- MAIN PROFILE CARD -->
+    <div class="profile-card">
+        
+        <div class="avatar-container">
+            <img src="https://cdn.discordapp.com/attachments/1471523107331375259/1505015914675048601/kh0b0b9.png?ex=6a0916cb&is=6a07c54b&hm=0b5fd1fe23495d5bc33b2d5f96f3f8a89c9a3354cd5a280eecd38b76bbd333fe&" alt="JokiiiiBoy Avatar">
+        </div>
+        
+        <h1>JokiiiiBoy</h1>
+        <div class="subtitle">&lt; Creative Coder &amp; Design Fan /&gt;</div>
+        
+        <div class="bio">
+            Hey there! Welcome to my dark corner of the web. 🔮 I craft clean frontend layouts, design cyber aesthetics, and write code. Always building and tweaking.
+        </div>
+
+        <div class="tech-stack">
+            <a href="https://github.com/JokiiiBoy" class="badge" target="_blank">🌐 HTML5</a>
+            <a href="https://github.com/JokiiiBoy" class="badge" target="_blank">☕ Java</a>
+            <a href="https://github.com/JokiiiBoy" class="badge" target="_blank">📜 JavaScript</a>
+            <a href="https://github.com/JokiiiBoy" class="badge" target="_blank">🐍 Python</a>
+        </div>
+
+        <a href="https://github.com/JokiiiBoy" class="btn-github" target="_blank">⚡ Launch GitHub Profile ⚡</a>
+
+        <a href="https://github.com/JokiiiBoy" target="_blank" class="secret-terminal">
+            &gt;_ exec ./unlock_hidden_configs.sh
+        </a>
+    </div>
 
 </body>
 </html>
