@@ -3,356 +3,552 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JokiiiiBoy | Profile & Cyber Terminal</title>
+    <title>𝓙𝓸𝓴𝓲𝓑𝓸𝔂 | HvH Community</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@500;700&family=Paytone+One&family=Rajdhani:wght@600;700&display=swap');
-
+        /* DARK EMO 2009 & SCENE HVH AESTHETIC */
         :root {
-            --bg-dark: #07050d;
-            --card-dark: rgba(18, 12, 31, 0.85);
-            --neon-green: #a2ff00;
+            --bg-main: #040207;
+            --container-bg: #0d0714;
+            --box-header: linear-gradient(180deg, #800f2f 0%, #590d22 50%, #25040f 51%, #3a0ca3 100%);
+            --box-bg: rgba(15, 8, 24, 0.9);
+            --border-purple: #7209b7;
+            --border-red: #ff4d6d;
+            --neon-cyan: #00f0ff;
             --neon-pink: #ff007f;
-            --neon-cyan: #00f3ff;
-            --lavender-glow: #bb86fc;
-            --text-main: #e3dff2;
-            --text-muted: #887a9e;
-        }
-
-        ::selection {
-            background: var(--neon-green);
-            color: #000;
-        }
-
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: var(--bg-dark);
-        }
-        ::-webkit-scrollbar-thumb {
-            background: linear-gradient(180deg, var(--neon-green), var(--neon-pink));
-            border-radius: 4px;
+            --neon-red: #ff124f;
+            --text-main: #f72585;
+            --text-sub: #b5179e;
+            --text-light: #e0aaff;
         }
 
         body {
-            font-family: 'Rajdhani', sans-serif;
-            background-color: var(--bg-dark);
+            font-family: 'Tahoma', 'Verdana', sans-serif;
+            background-color: var(--bg-main);
             background-image: 
-                radial-gradient(circle at 15% 15%, rgba(187, 134, 252, 0.08) 0%, transparent 40%),
-                radial-gradient(circle at 85% 85%, rgba(162, 255, 0, 0.06) 0%, transparent 40%),
-                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-            background-size: 100% 100%, 100% 100%, 30px 30px, 30px 30px;
-            color: var(--text-main);
+                radial-gradient(circle at 50% 0%, #590d22 0%, transparent 80%),
+                linear-gradient(rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0.8) 50%);
+            background-size: 100% 100%, 100% 4px; /* Scanline Overlay */
+            color: var(--text-light);
             margin: 0;
-            padding: 40px 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            box-sizing: border-box;
-            overflow-x: hidden;
-            cursor: crosshair;
+            padding: 25px 10px;
+            font-size: 11px;
         }
 
-        /* 1. TOP-RIGHT SECRET HUD WATERMARK LINK */
-        .secret-hud {
-            position: fixed;
-            top: 15px;
-            right: 15px;
-            background: rgba(10, 8, 18, 0.95);
-            color: var(--neon-green) !important;
-            font-family: 'Fira Code', monospace;
-            font-size: 11px;
-            padding: 6px 14px;
-            border: 1px solid #2d2a45;
-            border-top: 2px solid var(--neon-green);
-            box-shadow: 0 0 15px rgba(162, 255, 0, 0.2);
-            border-radius: 4px;
-            z-index: 10000;
+        a {
+            color: var(--neon-cyan);
             text-decoration: none;
-            letter-spacing: 1px;
+            transition: all 0.25s ease;
+        }
+        a:hover {
+            color: var(--neon-red);
+            text-shadow: 0 0 10px var(--neon-red);
+        }
+
+        /* MAIN CONTAINER */
+        .page-wrapper {
+            max-width: 840px;
+            margin: 0 auto;
+            background-color: var(--container-bg);
+            border: 2px solid var(--border-red);
+            box-shadow: 0 0 35px rgba(255, 18, 79, 0.3), inset 0 0 25px rgba(0, 0, 0, 0.95);
+            padding: 16px;
+            border-radius: 8px;
+            backdrop-filter: blur(5px);
+        }
+
+        /* HEADER BOX */
+        .profile-header {
+            background: var(--box-header);
+            border: 1px solid var(--border-red);
+            border-radius: 6px;
+            padding: 18px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 22px;
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.3), 0 0 20px rgba(128, 15, 47, 0.6);
+            position: relative;
+            overflow: hidden;
             transition: all 0.3s ease;
         }
-        .secret-hud:hover {
-            background: var(--neon-green);
-            color: #000 !important;
-            box-shadow: 0 0 25px var(--neon-green);
-            transform: scale(1.05);
+        .profile-header:hover {
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.5), 0 0 30px rgba(255, 0, 127, 0.5);
         }
 
-        /* 2. FLOATING SECRET SIDE ORBS */
-        .secret-orb-container {
-            position: fixed;
-            z-index: 9999;
-        }
-        .orb-left { top: 40%; left: 20px; }
-        .orb-right { top: 50%; right: 20px; }
-
-        .secret-orb {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 44px;
-            height: 44px;
-            background: rgba(18, 12, 31, 0.9);
-            border: 1px solid var(--neon-pink);
-            border-radius: 50%;
-            color: var(--neon-cyan) !important;
-            font-family: 'Fira Code', monospace;
-            font-size: 16px;
-            text-decoration: none;
-            box-shadow: 0 0 12px rgba(255, 0, 127, 0.4);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            animation: orbFloat 4s infinite ease-in-out;
-        }
-        .secret-orb:hover {
-            width: 150px;
-            border-radius: 22px;
-            border-color: var(--neon-green);
-            background: #090614;
-            color: var(--neon-green) !important;
-            box-shadow: 0 0 25px var(--neon-green);
-        }
-        .secret-orb .orb-text {
-            display: none;
-            font-size: 11px;
-            font-weight: bold;
-            margin-left: 8px;
-            letter-spacing: 1px;
-        }
-        .secret-orb:hover .orb-text {
-            display: inline;
-        }
-
-        /* 3. MAIN CARD CONTAINER */
-        .profile-card {
-            background: var(--card-dark);
-            backdrop-filter: blur(12px);
-            border-radius: 24px;
-            padding: 40px 35px;
-            max-width: 480px;
-            width: 100%;
-            text-align: center;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 30px rgba(187, 134, 252, 0.15);
-            border: 1px solid rgba(187, 134, 252, 0.2);
-            position: relative;
-            animation: cardPulse 3s infinite ease-in-out;
-        }
-
-        /* Avatar Container with Glitch & Hologram Effect */
-        .avatar-container {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--neon-green), var(--neon-pink), var(--neon-cyan));
-            margin: 0 auto 20px auto;
+        .avatar-frame {
+            width: 110px;
+            height: 110px;
+            background: #000;
+            border: 2px solid var(--neon-red);
+            box-shadow: 0 0 14px var(--neon-red), inset 0 0 8px #000;
             padding: 3px;
-            box-shadow: 0 0 30px rgba(162, 255, 0, 0.3);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transition: transform 0.4s ease;
+            flex-shrink: 0;
+            border-radius: 4px;
+            transition: all 0.3s ease;
         }
-        .avatar-container:hover {
-            transform: scale(1.08) rotate(3deg);
-            box-shadow: 0 0 45px rgba(255, 0, 127, 0.6);
-            animation: glitchShake 0.2s infinite;
+        .avatar-frame:hover {
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 20px var(--neon-cyan);
         }
-        .avatar-container img {
+        .avatar-frame img {
             width: 100%;
             height: 100%;
-            border-radius: 50%;
             object-fit: cover;
+            display: block;
+            transition: transform 0.4s ease;
+        }
+        .avatar-frame:hover img {
+            transform: scale(1.1) rotate(-3deg);
         }
 
-        /* Title & Gradient */
-        h1 {
-            font-family: 'Paytone One', sans-serif;
+        .header-info h1 {
+            font-size: 30px;
             margin: 0 0 6px 0;
-            font-size: 2.2rem;
-            letter-spacing: 1px;
-            background: linear-gradient(90deg, var(--neon-green), var(--lavender-glow), var(--neon-cyan), var(--neon-pink));
-            background-size: 300% 100%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: rainbowShift 4s linear infinite;
+            color: #ffffff;
+            text-shadow: 0 0 12px var(--neon-red), 2px 2px 0px #000;
+            letter-spacing: 1.5px;
+            font-family: 'Trebuchet MS', sans-serif;
+            transition: text-shadow 0.3s ease;
+        }
+        .header-info h1:hover {
+            text-shadow: 0 0 18px var(--neon-pink), 0 0 28px var(--neon-pink), 2px 2px 0px #000;
         }
 
-        .subtitle {
-            font-family: 'Fira Code', monospace;
-            font-size: 0.85rem;
-            color: var(--neon-green);
-            margin-bottom: 22px;
-            font-weight: 700;
-            letter-spacing: 1px;
+        .sub-headline {
+            color: var(--neon-cyan);
+            font-weight: bold;
+            font-size: 12px;
+            text-shadow: 0 0 6px rgba(0, 240, 255, 0.6);
+        }
+
+        /* STATUS TICKER */
+        .status-ticker {
+            background: rgba(5, 2, 8, 0.95);
+            border: 1px solid var(--border-purple);
+            padding: 8px 12px;
+            margin-bottom: 15px;
+            font-family: 'Courier New', monospace;
+            color: var(--neon-red);
+            font-size: 11px;
+            box-shadow: inset 0 0 10px #000;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        .status-ticker:hover {
+            border-color: var(--neon-pink);
+            box-shadow: 0 0 14px rgba(255, 0, 127, 0.4), inset 0 0 8px #000;
+        }
+
+        /* GRID LAYOUT */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 270px 1fr;
+            gap: 14px;
+        }
+
+        /* REUSABLE BOX */
+        .box {
+            background-color: var(--box-bg);
+            border: 1px solid rgba(114, 9, 183, 0.6);
+            border-radius: 6px;
+            margin-bottom: 14px;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.8);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        .box:hover {
+            border-color: var(--neon-red);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 22px rgba(255, 18, 79, 0.3);
+        }
+
+        .box-title {
+            background: var(--box-header);
+            color: #fff;
+            font-weight: bold;
+            font-size: 11px;
+            padding: 6px 10px;
+            border-bottom: 1px solid #000;
+            text-shadow: 1px 1px 2px #000;
+            letter-spacing: 0.8px;
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.3);
             text-transform: uppercase;
         }
 
-        .bio {
-            font-size: 1.05rem;
-            line-height: 1.6;
-            color: var(--text-main);
-            margin-bottom: 25px;
-            background-color: rgba(28, 20, 48, 0.6);
-            padding: 20px;
-            border-radius: 16px;
-            border: 1px solid rgba(187, 134, 252, 0.15);
-            text-align: left;
-            position: relative;
-        }
-        .bio::before {
-            content: "// BIO_LOG";
-            display: block;
-            font-family: 'Fira Code', monospace;
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            margin-bottom: 8px;
+        .box-body {
+            padding: 12px;
         }
 
-        /* Tech Stack Badges */
-        .tech-stack {
+        /* CUSTOM AUDIO PLAYER */
+        .mp3-player {
+            background: linear-gradient(180deg, #180514 0%, #080108 100%);
+            border: 1px solid var(--border-red);
+            border-radius: 4px;
+            padding: 10px;
+            box-shadow: inset 0 0 10px #000;
+        }
+        .player-title {
+            color: var(--neon-pink);
+            font-weight: bold;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            text-shadow: 0 0 5px rgba(255, 0, 127, 0.5);
+        }
+        .player-controls {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 8px;
+        }
+        .btn-play {
+            background: linear-gradient(180deg, #ff124f 0%, #800f2f 100%);
+            border: 1px solid var(--neon-red);
+            color: #fff;
+            font-weight: bold;
+            font-size: 10px;
+            padding: 4px 12px;
+            cursor: pointer;
+            border-radius: 3px;
+            box-shadow: 0 0 8px rgba(255, 18, 79, 0.5);
+            transition: all 0.2s ease;
+        }
+        .btn-play:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 14px var(--neon-red);
+        }
+        .progress-bar {
+            flex-grow: 1;
+            height: 8px;
+            background: #000;
+            border: 1px solid #444;
+            position: relative;
+            border-radius: 4px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        .progress-fill {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, var(--neon-pink), var(--neon-cyan));
+            box-shadow: 0 0 8px var(--neon-pink);
+            transition: width 0.1s linear;
+        }
+
+        .volume-container {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 8px;
+            padding-top: 6px;
+            border-top: 1px dotted rgba(255, 18, 79, 0.3);
+            font-size: 9px;
+            color: var(--text-sub);
+        }
+        .volume-slider {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 5px;
+            border-radius: 3px;
+            background: #000;
+            border: 1px solid #333;
+            outline: none;
+            cursor: pointer;
+        }
+        .volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--neon-red);
+            border: 1px solid #fff;
+            box-shadow: 0 0 6px var(--neon-red);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .volume-slider::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+            background: var(--neon-cyan);
+            box-shadow: 0 0 8px var(--neon-cyan);
+        }
+
+        /* TABLES */
+        .details-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .details-table tr {
+            transition: background-color 0.2s ease;
+        }
+        .details-table tr:hover {
+            background-color: rgba(255, 18, 79, 0.15);
+        }
+        .details-table td {
+            padding: 5px 4px;
+            border-bottom: 1px dotted rgba(114, 9, 183, 0.4);
+        }
+        .details-table td.label {
+            color: var(--neon-cyan);
+            font-weight: bold;
+            width: 38%;
+        }
+
+        /* BADGES & CHIPS */
+        .badge-list {
             display: flex;
             flex-wrap: wrap;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 30px;
+            gap: 6px;
         }
-
-        .badge {
-            background-color: rgba(35, 27, 58, 0.8);
-            color: var(--text-main);
-            padding: 8px 16px;
-            border-radius: 8px;
-            font-family: 'Fira Code', monospace;
-            font-size: 0.85rem;
-            font-weight: 700;
-            border: 1px solid rgba(187, 134, 252, 0.2);
-            transition: all 0.3s ease;
-            text-decoration: none;
-        }
-        .badge:hover {
-            border-color: var(--neon-green);
-            color: var(--neon-green);
-            background: rgba(162, 255, 0, 0.1);
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(162, 255, 0, 0.2);
-        }
-
-        /* Neon Primary Button */
-        .btn-github {
-            display: block;
-            width: 100%;
-            box-sizing: border-box;
-            background: linear-gradient(135deg, #7928ca, #ff007f);
-            color: white;
-            text-decoration: none;
-            padding: 16px 20px;
+        .web2-badge {
+            background: linear-gradient(180deg, #590d22 0%, #1a000a 100%);
+            border: 1px solid var(--border-red);
+            color: var(--text-light);
+            font-weight: bold;
+            font-size: 10px;
+            padding: 4px 10px;
             border-radius: 12px;
-            font-family: 'Rajdhani', sans-serif;
-            font-weight: 700;
-            font-size: 1.1rem;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 20px rgba(255, 0, 127, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 6px rgba(255, 18, 79, 0.2);
+            text-shadow: 1px 1px 0 #000;
+            transition: all 0.25s ease;
+            cursor: default;
         }
-        .btn-github:hover {
-            filter: brightness(1.2);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(255, 0, 127, 0.6), 0 0 15px var(--neon-green);
+        .web2-badge:hover {
+            transform: translateY(-2px) scale(1.05);
+            border-color: var(--neon-cyan);
+            color: #fff;
+            box-shadow: 0 0 12px var(--neon-cyan);
         }
 
-        /* 4. BOTTOM SECRET TERMINAL TRIGGER */
-        .secret-terminal {
-            display: inline-block;
-            margin-top: 20px;
-            font-family: 'Fira Code', monospace;
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            text-decoration: none;
-            transition: all 0.3s ease;
-            padding: 4px 8px;
+        /* HVH CARD */
+        .hvh-card {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 10px;
+            border: 1px solid rgba(255, 18, 79, 0.4);
             border-radius: 4px;
+            transition: all 0.3s ease;
         }
-        .secret-terminal:hover {
-            color: var(--neon-cyan);
-            background: rgba(0, 243, 255, 0.1);
-            text-shadow: 0 0 8px var(--neon-cyan);
-        }
-
-        /* Keyframes */
-        @keyframes rainbowShift {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 300% 50%; }
-        }
-        @keyframes cardPulse {
-            0% { border-color: rgba(187, 134, 252, 0.2); }
-            50% { border-color: rgba(162, 255, 0, 0.4); }
-            100% { border-color: rgba(187, 134, 252, 0.2); }
-        }
-        @keyframes orbFloat {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-        }
-        @keyframes glitchShake {
-            0% { transform: translate(0, 0) scale(1.08); }
-            25% { transform: translate(-2px, 2px) scale(1.08); }
-            50% { transform: translate(2px, -2px) scale(1.08); }
-            75% { transform: translate(-2px, -2px) scale(1.08); }
-            100% { transform: translate(0, 0) scale(1.08); }
+        .hvh-card:hover {
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 16px rgba(0, 240, 255, 0.3);
+            transform: translateX(4px);
         }
     </style>
 </head>
 <body>
 
-    <!-- SECRET HUD LINK (Top Right) -->
-    <a href="https://github.com/JokiiiBoy?tab=repositories" target="_blank" class="secret-hud">
-        [SYS_STATUS: ACTIVE | UID: 1337]
-    </a>
+<div class="page-wrapper">
 
-    <!-- SECRET SIDE ORB BUTTONS -->
-    <div class="secret-orb-container orb-left">
-        <a href="https://github.com/JokiiiBoy" target="_blank" class="secret-orb">
-            ⛧ <span class="orb-text">SECRET REPO</span>
-        </a>
+    <!-- HEADER -->
+    <div class="profile-header">
+        <div class="avatar-frame">
+            <img src="https://raw.githubusercontent.com/JokiiiBoy/JokiiiBoy.github.io/main/avatar.png" alt="𝓙𝓸𝓴𝓲𝓑𝓸𝔂">
+        </div>
+        <div class="header-info">
+            <h1>𝓙𝓸𝓴𝓲𝓑𝓸𝔂</h1>
+            <div class="sub-headline">"1TAP RESOLVER // SILVER1ELITE"</div>
+        </div>
     </div>
 
-    <div class="secret-orb-container orb-right">
-        <a href="https://github.com/JokiiiBoy" target="_blank" class="secret-orb">
-            ⚡ <span class="orb-text">CFG / DOTFILES</span>
-        </a>
+    <!-- STATUS TICKER -->
+    <div class="status-ticker">
+        <strong>Mood:</strong> 🖤 I play with all guns and still win | <strong>Song:</strong> Step Back!.mp3
     </div>
 
-    <!-- MAIN PROFILE CARD -->
-    <div class="profile-card">
-        
-        <div class="avatar-container">
-            <img src="https://cdn.discordapp.com/attachments/1471523107331375259/1505015914675048601/kh0b0b9.png?ex=6a0916cb&is=6a07c54b&hm=0b5fd1fe23495d5bc33b2d5f96f3f8a89c9a3354cd5a280eecd38b76bbd333fe&" alt="JokiiiiBoy Avatar">
-        </div>
-        
-        <h1>JokiiiiBoy</h1>
-        <div class="subtitle">&lt; Creative Coder &amp; Design Fan /&gt;</div>
-        
-        <div class="bio">
-            Hey there! Welcome to my dark corner of the web. 🔮 I craft clean frontend layouts, design cyber aesthetics, and write code. Always building and tweaking.
+    <!-- 2-COLUMN LAYOUT -->
+    <div class="content-grid">
+
+        <!-- LEFT COLUMN -->
+        <div class="left-col">
+
+            <!-- CONTACT BOX -->
+            <div class="box">
+                <div class="box-title">Contact 𝓙𝓸𝓴𝓲𝓑𝓸𝔂</div>
+                <div class="box-body">
+                    <table class="details-table">
+                        <tr><td class="label">Discord:</td><td>jokiiiiboy</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- AUDIO PLAYER -->
+            <div class="box">
+                <div class="box-title">Profile Song (Audio Player)</div>
+                <div class="box-body">
+                    <div class="mp3-player">
+                        <div class="player-title">
+                            <span>Step Back!.mp3</span>
+                            <span id="time-display">0:00</span>
+                        </div>
+                        <div class="progress-bar" id="progress-container">
+                            <div class="progress-fill" id="progress-fill"></div>
+                        </div>
+                        <div class="player-controls">
+                            <button class="btn-play" id="play-btn">▶ PLAY</button>
+                        </div>
+                        <div class="volume-container">
+                            <span> Vol:</span>
+                            <input type="range" class="volume-slider" id="volume-slider" min="0" max="1" step="0.01" value="1">
+                        </div>
+                    </div>
+                    <audio id="audio-element" src="https://raw.githubusercontent.com/JokiiiBoy/JokiiiBoy.github.io/main/Step%20Back!.mp3" preload="metadata"></audio>
+                </div>
+            </div>
+
+            <!-- HVH PLAYSTYLE -->
+            <div class="box">
+                <div class="box-title">HvH Playstyle</div>
+                <div class="box-body">
+                    <div style="color: var(--neon-cyan); font-weight: bold; padding: 4px 0;">
+                        I play with all guns and still win 
+                    </div>
+                </div>
+            </div>
+
+            <!-- PERSONAL INFO -->
+            <div class="box">
+                <div class="box-title">Personal Info</div>
+                <div class="box-body">
+                    <table class="details-table">
+                        <tr><td class="label">Location:</td><td>Germany</td></tr>
+                        <tr><td class="label">Scene Music:</td><td>Post-Hardcore, Metalcore, Electro</td></tr>
+                        <tr><td class="label">Interests:</td><td>HvH Servers, Web Dev, Dark Themes</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- HARDWARE SPECS -->
+            <div class="box">
+                <div class="box-title">System Specs (Rig)</div>
+                <div class="box-body">
+                    <table class="details-table">
+                        <tr><td class="label">CPU:</td><td>Intel Core 2 Quad Q6600</td></tr>
+                        <tr><td class="label">GPU:</td><td>NVIDIA GeForce 9800 GTX</td></tr>
+                        <tr><td class="label">RAM:</td><td>4GB DDR2 800MHz</td></tr>
+                        <tr><td class="label">OS:</td><td>Windows 7 RC</td></tr>
+                    </table>
+                </div>
+            </div>
+
         </div>
 
-        <div class="tech-stack">
-            <a href="https://github.com/JokiiiBoy" class="badge" target="_blank">🌐 HTML5</a>
-            <a href="https://github.com/JokiiiBoy" class="badge" target="_blank">☕ Java</a>
-            <a href="https://github.com/JokiiiBoy" class="badge" target="_blank">📜 JavaScript</a>
-            <a href="https://github.com/JokiiiBoy" class="badge" target="_blank">🐍 Python</a>
+        <!-- RIGHT COLUMN -->
+        <div class="right-col">
+
+            <!-- ABOUT ME -->
+            <div class="box">
+                <div class="box-title">About Me</div>
+                <div class="box-body">
+                    <p style="margin: 0; color: var(--neon-pink); font-weight: bold; font-size: 12px;">just playing hvh vs some nn</p>
+                </div>
+            </div>
+
+            <!-- STEAM HVH GROUP -->
+            <div class="box">
+                <div class="box-title">Steam Clan / HvH Community</div>
+                <div class="box-body">
+                    <div class="hvh-card">
+                        <div style="border: 1px solid var(--neon-red); padding: 2px; background: #000; flex-shrink: 0; box-shadow: 0 0 10px rgba(255,18,79,0.5);">
+                            <img src="https://raw.githubusercontent.com/JokiiiBoy/JokiiiBoy.github.io/main/avatar.png" alt="Silver1Elite" style="width: 44px; height: 44px; display: block; object-fit: cover;">
+                        </div>
+                        <div>
+                            <div style="font-size: 14px; font-weight: bold;">
+                                <a href="https://steamcommunity.com/groups/Silver1Elitez" target="_blank" style="color: var(--neon-cyan);">Silver1Elite</a>
+                            </div>
+                            <div style="margin-top: 8px;">
+                                <a href="https://steamcommunity.com/groups/Silver1Elitez" target="_blank" class="web2-badge" style="display: inline-block; color: #fff;">Join Steam Group ➔</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- EMO 2009 SCENE BANDS -->
+            <div class="box">
+                <div class="box-title">Scene Music &amp; Bands</div>
+                <div class="box-body">
+                    <div class="badge-list">
+                        <span class="web2-badge"> Bring Me The Horizon</span>
+                        <span class="web2-badge"> Asking Alexandria</span>
+                        <span class="web2-badge"> Suicide Silence</span>
+                        <span class="web2-badge"> Bullet For My Valentine</span>
+                        <span class="web2-badge"> Electro House / HandsUp</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SKILLS BADGES -->
+            <div class="box">
+                <div class="box-title">Skills &amp; Badges</div>
+                <div class="box-body">
+                    <div class="badge-list">
+                        <span class="web2-badge"> HTML5 / CSS3</span>
+                        <span class="web2-badge"> JavaScript / jQuery</span>
+                        <span class="web2-badge"> Python</span>
+                        <span class="web2-badge"> MySQL</span>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
-        <a href="https://github.com/JokiiiBoy" class="btn-github" target="_blank">⚡ Launch GitHub Profile ⚡</a>
-
-        <a href="https://github.com/JokiiiBoy" target="_blank" class="secret-terminal">
-            &gt;_ exec ./unlock_hidden_configs.sh
-        </a>
     </div>
+
+    <!-- FOOTER -->
+    <div style="text-align: center; margin-top: 15px; color: #800f2f; font-size: 10px; font-weight: bold;">
+        &copy; 2009-2026 𝓙𝓸𝓴𝓲𝓑𝓸𝔂 | Dark HvH Network.
+    </div>
+
+</div>
+
+<!-- AUDIO PLAYER SCRIPT -->
+<script>
+    const audio = document.getElementById('audio-element');
+    const playBtn = document.getElementById('play-btn');
+    const progressFill = document.getElementById('progress-fill');
+    const progressContainer = document.getElementById('progress-container');
+    const timeDisplay = document.getElementById('time-display');
+    const volumeSlider = document.getElementById('volume-slider');
+
+    playBtn.addEventListener('click', () => {
+        if (audio.paused) {
+            audio.play();
+            playBtn.textContent = '❚❚ PAUSE';
+            playBtn.style.background = 'linear-gradient(180deg, #00f0ff 0%, #007799 100%)';
+            playBtn.style.borderColor = '#00f0ff';
+        } else {
+            audio.pause();
+            playBtn.textContent = '▶ PLAY';
+            playBtn.style.background = 'linear-gradient(180deg, #ff124f 0%, #800f2f 100%)';
+            playBtn.style.borderColor = '#ff124f';
+        }
+    });
+
+    audio.addEventListener('timeupdate', () => {
+        if (audio.duration) {
+            const pct = (audio.currentTime / audio.duration) * 100;
+            progressFill.style.width = pct + '%';
+            
+            const mins = Math.floor(audio.currentTime / 60);
+            const secs = Math.floor(audio.currentTime % 60).toString().padStart(2, '0');
+            timeDisplay.textContent = `${mins}:${secs}`;
+        }
+    });
+
+    progressContainer.addEventListener('click', (e) => {
+        const rect = progressContainer.getBoundingClientRect();
+        const pos = (e.clientX - rect.left) / rect.width;
+        if (audio.duration) {
+            audio.currentTime = pos * audio.duration;
+        }
+    });
+
+    volumeSlider.addEventListener('input', (e) => {
+        audio.volume = e.target.value;
+    });
+</script>
 
 </body>
 </html>
